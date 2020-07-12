@@ -1,0 +1,6 @@
+.dockerignore
+.git
+.hadolint.yaml
+LICENSE
+Makefile
+README.md
