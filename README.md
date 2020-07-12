@@ -4,7 +4,7 @@
 
 [![prantlf/alpine-glibc](http://dockeri.co/image/prantlf/alpine-glibc)](https://hub.docker.com/repository/docker/prantlf/alpine-glibc/)
 
-[This image] is supposed to run JavaScript applications written for [Low.js], which supports a subset of [Node.js] API with much less footprint. For example, Node.js 14.3.0 needs 120 MB and Low.js 1.5.1 needs 6 MB on the disk. The price is a [limited API] and a JavaScript engine without JIT ([Duktape]). This image is built automatically on the top of the tag `latest` from the [Alpine repository], so that it is always based on the latest [Alpine Linux]. [Low.js] has to be updated from time to time by triggering a new build manually.
+[This image] is supposed to serve as a base for small images ([Alpine Linux]) which need to include tools built against [GNU C Library (glibc)]. This image is built automatically on the top of the tag `latest` from the [Alpine repository], so that it is always based on the latest [Alpine Linux]. The package [alpine-pkg-glibc] has to be updated from time to time by triggering a new build manually.
 
 ## Tags
 
@@ -18,17 +18,15 @@ docker pull prantlf/alpine-glibc
 
 ## Use
 
-You can either create your own image based on this one, or you can use it directly to run a JavaScript project. The Low.js binary `/bin/low` is the default entrypoint. The directory `/root` is the default working directory. Ports 80 and 443 are exposed by default.
+You can create your own image based on this one by referring to it from your `Dockerfile`:
 
-For example, run a script from `hello.js` in the current directory:
+```dockerfile
+FROM prantlf/alpine-glibc:latest
+```
 
-    docker run --rm -it -v "${PWD}":/root \
-      prantlf/alpine-glibc hello.js
+The final image can use the English locale by setting the environment variable `LANG` to  `C.UTF-8` or `en_US.UTF-8`.
 
-For example, start a web server using built-in networking modules from `server.js` in the current directory:
-
-    docker run --rm -it -v "${PWD}":/root -p 80:80 -p 443:443 \
-      prantlf/alpine-glibc server.js
+See the [`git-p4` Docker image repository] for an example.
 
 ## Build, Test and Publish
 
@@ -71,9 +69,8 @@ Licensed under the MIT license.
 [Docker]: https://www.docker.com/
 [This image]: https://hub.docker.com/repository/docker/prantlf/alpine-glibc
 [`latest`]: https://hub.docker.com/repository/docker/prantlf/alpine-glibc/tags
-[Low.js]: https://www.neonious.com/alpine-glibc/
-[Node.js]: https://nodejs.org/
-[limited API]: https://www.neonious.com/alpine-glibc/documentation/nodejs-api.html
-[Duktape]: https://duktape.org/
+[GNU C Library (glibc)]: https://www.gnu.org/software/libc/
+[alpine-pkg-glibc]: https://github.com/sgerrand/alpine-pkg-glibc#readme
 [Alpine repository]: https://hub.docker.com/_/alpine
 [Alpine Linux]: https://alpinelinux.org/
+[`git-p4` Docker image repository]: https://github.com/prantlf/docker-git-p4#readme
