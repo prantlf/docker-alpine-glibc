@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.12
 LABEL maintainer="Ferdinand Prantl <prantlf@gmail.com>"
 
 RUN wget -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
