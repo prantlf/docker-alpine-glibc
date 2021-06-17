@@ -8,13 +8,13 @@
 
 ## Tags
 
-- [`latest`], `3.13`, `3.12`
+- [`latest`], `3.14`, `3.13`, `3.12`
 
 ## Install
 
 ```
 docker pull prantlf/alpine-glibc
-docker pull prantlf/alpine-glibc:3.13
+docker pull prantlf/alpine-glibc:3.14
 ```
 
 ## Use
@@ -50,7 +50,7 @@ The local image is built as `alpine-glibc` and pushed to the docker hub as `pran
 
 ## License
 
-Copyright (c) 2020 Ferdinand Prantl
+Copyright (c) 2020-2021 Ferdinand Prantl
 
 Licensed under the MIT license.
 
