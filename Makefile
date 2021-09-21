@@ -3,9 +3,8 @@ clean ::
 
 lint ::
 	docker run --rm -i \
-		-v "${PWD}"/.hadolint.yaml:/bin/hadolint.yaml \
-		-e XDG_CONFIG_HOME=/bin hadolint/hadolint \
-		< Dockerfile
+		-v "${PWD}"/.hadolint.yaml:/.config/hadolint.yaml  \
+		hadolint/hadolint < Dockerfile
 
 build ::
 	docker build -t alpine-glibc:3.14 .
