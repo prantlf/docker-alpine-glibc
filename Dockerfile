@@ -10,6 +10,8 @@ RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/s
 	rm glibc-bin-2.34-r0.apk && \
 	wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.34-r0/glibc-i18n-2.34-r0.apk && \
 	apk add --no-cache glibc-i18n-2.34-r0.apk && \
-	rm glibc-i18n-2.34-r0.apk /etc/apk/keys/sgerrand.rsa.pub && \
-	/usr/glibc-compat/bin/localedef -i en_US -f UTF-8 en_US.UTF-8
+	rm glibc-i18n-2.34-r0.apk /etc/apk/keys/sgerrand.rsa.pub
+RUN ls -l /usr/glibc-compat/share/i18n/locales/en_US
+RUN ls -l /usr/glibc-compat/share/i18n/charmaps/UTF-8.gz
+RUN	/usr/glibc-compat/bin/localedef -i en_US -f UTF-8 en_US.UTF-8
 #	apk del glibc-bin glibc-i18n

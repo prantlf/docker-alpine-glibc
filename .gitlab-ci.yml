@@ -9,10 +9,10 @@ variables:
 
 build:
   script:
-    - |
-      docker run --rm -i \
-        -v "${PWD}"/.hadolint.yaml:/.config/hadolint.yaml \
-        hadolint/hadolint < Dockerfile
+#    - |
+#      docker run --rm -i \
+#        -v "${PWD}"/.hadolint.yaml:/.config/hadolint.yaml \
+#        hadolint/hadolint < Dockerfile
     - docker build -t $GITLAB_TAG .
 #    - docker tag $GITLAB_TAG $HUB_TAG
 #    - echo -n "$CI_REGISTRY_PASSWORD" | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
