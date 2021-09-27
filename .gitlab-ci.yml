@@ -1,4 +1,4 @@
-image: docker::19.03.14
+image: docker::19.03.13
 services:
   - name: docker:dind
     command: ["--mtu=1300"]
