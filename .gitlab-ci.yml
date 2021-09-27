@@ -1,7 +1,6 @@
 image: docker:20
 services:
-  - name: docker:dind
-    command: ["--mtu=1300"]
+  - docker:dind
 
 variables:
   IMAGE_VER: "3.14"
