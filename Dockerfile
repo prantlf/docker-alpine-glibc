@@ -1,7 +1,7 @@
 FROM alpine:3.14
 LABEL maintainer="Ferdinand Prantl <prantlf@gmail.com>"
 
-RUN apk --no-cache add gzip && \
+RUN apk update && apk --no-cache add gzip && \
   wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
   wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.34-r0/glibc-2.34-r0.apk && \
   apk --no-cache add glibc-2.34-r0.apk && \
