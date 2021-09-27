@@ -1,5 +1,5 @@
 clean ::
-	docker image rm alpine-glibc
+	docker image rm alpine-glibc:3.14
 
 lint ::
 	docker run --rm -i \
@@ -7,16 +7,16 @@ lint ::
 		hadolint/hadolint < Dockerfile
 
 build ::
-	docker build -t alpine-glibc .
+	docker build -t alpine-glibc:3.14 .
 
 run ::
-	docker run --rm -t -i alpine-glibc
+	docker run --rm -t -i alpine-glibc:3.14
 
 tag ::
-	docker tag alpine-glibc prantlf/alpine-glibc:latest
+	docker tag alpine-glibc:3.14 prantlf/alpine-glibc:3.14
 
 login ::
 	docker login --username=prantlf
 
 push ::
-	docker push prantlf/alpine-glibc:latest
+	docker push prantlf/alpine-glibc:3.14
