@@ -1,7 +1,8 @@
 image: docker:20
 services:
   - name: docker:dind
-    command: ["--mtu=1300"]
+    # Uncomment the following line to unblock fetching the APKINDEX files
+    # command: ["--mtu=1300"]
 
 variables:
   IMAGE_VER: latest
@@ -10,16 +11,16 @@ variables:
 
 build:
   script:
-    - |
-      docker run --rm -i \
-        -v "${PWD}"/.hadolint.yaml:/.config/hadolint.yaml \
-        hadolint/hadolint < Dockerfile
+    # - |
+    #   docker run --rm -i \
+    #     -v "${PWD}"/.hadolint.yaml:/.config/hadolint.yaml \
+    #     hadolint/hadolint < Dockerfile
     - docker build -t $GITLAB_TAG .
-    - docker tag $GITLAB_TAG $HUB_TAG
-    - echo -n "$CI_REGISTRY_PASSWORD" | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
-    - docker push $GITLAB_TAG
-    - |
-      mkdir -p $HOME/.docker
-      echo '{ "auths": { "'https://index.docker.io/v1/'": { "auth": "'$DOCKER_AUTH'", "email": "prantlf@gmail.com" } } }' \
-        > $HOME/.docker/config.json
-    - docker push $HUB_TAG
+    # - docker tag $GITLAB_TAG $HUB_TAG
+    # - echo -n "$CI_REGISTRY_PASSWORD" | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+    # - docker push $GITLAB_TAG
+    # - |
+    #   mkdir -p $HOME/.docker
+    #   echo '{ "auths": { "'https://index.docker.io/v1/'": { "auth": "'$DOCKER_AUTH'", "email": "prantlf@gmail.com" } } }' \
+    #     > $HOME/.docker/config.json
+    # - docker push $HUB_TAG
