@@ -16,5 +16,5 @@ RUN gunzip --keep /usr/glibc-compat/share/i18n/charmaps/UTF-8.gz
 RUN ls -l /usr/glibc-compat/share/i18n/locales/en_US
 RUN ls -l /usr/glibc-compat/share/i18n/charmaps/UTF-8.gz
 RUN ls -l /usr/glibc-compat/share/i18n/charmaps/UTF-8
-RUN	/usr/glibc-compat/bin/localedef -i en_US -f UTF-8 en_US.UTF-8
-#	apk del glibc-bin glibc-i18n gzip wget
+RUN	/usr/glibc-compat/bin/localedef -v -i en_US -f UTF-8 en_US.UTF-8
+RUN apk del glibc-bin glibc-i18n gzip wget
