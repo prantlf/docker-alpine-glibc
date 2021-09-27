@@ -1,4 +1,4 @@
-image: docker:stable
+image: docker:20
 services:
   - name: docker:dind
     command: ["--mtu=1300"]
