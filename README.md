@@ -33,6 +33,17 @@ The final image can use the English locale by setting the environment variable `
 
 See the [`git-p4` Docker image repository] for an example.
 
+If you install `glibc-bin-2.34-r0.apk`, you will need to fix scripts that refer to `/usr/bin/bash`. For example:
+
+    sed -i 's#/usr/bin/bash#/bin/sh#' /usr/glibc-compat/bin/ldd
+    sed -i 's#/usr/bin/bash#/bin/sh#' /usr/glibc-compat/bin/sotruss
+    sed -i 's#/usr/bin/bash#/bin/sh#' /usr/glibc-compat/bin/tzselect
+    sed -i 's#/usr/bin/bash#/bin/sh#' /usr/glibc-compat/bin/xtrace
+
+Or you can create a symlink `bash` in `/usr/bin`:
+
+    ln -s /bin/sh /usr/bin/bash
+
 ## Build, Test and Publish
 
 The local image is built as `alpine-glibc` and pushed to the docker hub as `prantlf/alpine-glibc:latest`.
