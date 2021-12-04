@@ -12,13 +12,13 @@ If you have trouble pulling the image from the Docker's default hub.docker.com, 
 
 Tags consist of versions of the Alpine Linux and GLIBC in this order, separated by a hyphen. The `latest` tag maps to the latest `<alpine>` tag. The latest `<alpine>` tag maps to the latest `<alpine>-<glibc>` tag.
 
-- [`latest`], `3.14`, `3.14-2.34`, `3.14-2.33`, `3.13`, `3.12`
+- [`latest`], `3.15`, `3.14`, `3.14-2.34`, `3.14-2.33`, `3.13`, `3.12`
 
 ## Install
 
 ```
 docker pull prantlf/alpine-glibc
-docker pull prantlf/alpine-glibc:3.14
+docker pull prantlf/alpine-glibc:3.15
 ```
 
 ## Use

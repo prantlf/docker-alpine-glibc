@@ -1,4 +1,4 @@
-FROM alpine:3.14
+FROM alpine:3.15
 LABEL maintainer="Ferdinand Prantl <prantlf@gmail.com>"
 
 RUN apk update && apk --no-cache add gzip && \
