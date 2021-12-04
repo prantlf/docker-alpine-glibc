@@ -3,9 +3,10 @@ services:
   - docker:dind
 
 variables:
-  IMAGE_VER: latest
-  GITLAB_TAG: $CI_REGISTRY_IMAGE:$IMAGE_VER
-  HUB_TAG: prantlf/alpine-glibc:$IMAGE_VER
+  GITLAB_TAG: $CI_REGISTRY_IMAGE
+  GITLAB_TAG_BIN: $CI_REGISTRY_IMAGE:bin
+  HUB_TAG: prantlf/alpine-glibc
+  HUB_TAG_BIN: prantlf/alpine-glibc:bin
 
 build:
   script:
@@ -13,12 +14,19 @@ build:
       docker run --rm -i \
         -v "${PWD}"/.hadolint.yaml:/.config/hadolint.yaml \
         hadolint/hadolint < Dockerfile
+      docker run --rm -i \
+        -v "${PWD}"/.hadolint.yaml:/.config/hadolint.yaml \
+        hadolint/hadolint < Dockerfile-bin
     - docker build -t $GITLAB_TAG .
+    - docker build -t $GITLAB_TAG_BIN -f Dockerfile-bin .
     - docker tag $GITLAB_TAG $HUB_TAG
+    - docker tag $GITLAB_TAG_BIN $HUB_TAG_BIN
     - echo -n "$CI_REGISTRY_PASSWORD" | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
     - docker push $GITLAB_TAG
+    - docker push $GITLAB_TAG_BIN
     - |
       mkdir -p $HOME/.docker
       echo '{ "auths": { "'https://index.docker.io/v1/'": { "auth": "'$DOCKER_AUTH'", "email": "prantlf@gmail.com" } } }' \
         > $HOME/.docker/config.json
     - docker push $HUB_TAG
+    - docker push $HUB_TAG_BIN

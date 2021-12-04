@@ -10,9 +10,9 @@ If you have trouble pulling the image from the Docker's default hub.docker.com, 
 
 ## Tags
 
-Tags consist of versions of the Alpine Linux and GLIBC in this order, separated by a hyphen. The `latest` tag maps to the latest `<alpine>` tag. The latest `<alpine>` tag maps to the latest `<alpine>-<glibc>` tag.
+Tags consist of versions of the Alpine Linux and GLIBC in this order, separated by a hyphen. The `latest` tag maps to the latest `<alpine>` tag. The latest `<alpine>` tag maps to the latest `<alpine>-<glibc>` tag. The `bin` and `<alpine>-bin` tags contain the `glibc-bin` package installed too.
 
-- [`latest`], `3.15`, `3.14`, `3.14-2.34`, `3.14-2.33`, `3.13`, `3.12`
+- [`latest`], `bin`, `3.15`, `3.15-bin`, `3.14`, `3.14-2.34`, `3.14-2.33`, `3.13`, `3.12`
 
 ## Install
 
