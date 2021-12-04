@@ -1,0 +1,11 @@
+FROM prantlf/alpine-glibc:3.15
+LABEL maintainer="Ferdinand Prantl <prantlf@gmail.com>"
+
+RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
+  wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.34-r0/glibc-bin-2.34-r0.apk && \
+  apk add glibc-bin-2.34-r0.apk && \
+  sed -i 's#/usr/bin/bash#/bin/sh#' /usr/glibc-compat/bin/ldd && \
+  sed -i 's#/usr/bin/bash#/bin/sh#' /usr/glibc-compat/bin/sotruss && \
+  sed -i 's#/usr/bin/bash#/bin/sh#' /usr/glibc-compat/bin/tzselect && \
+  sed -i 's#/usr/bin/bash#/bin/sh#' /usr/glibc-compat/bin/xtrace && \
+  rm glibc-bin-2.34-r0.apk /etc/apk/keys/sgerrand.rsa.pub /var/cache/apk/*
