@@ -44,6 +44,13 @@ Or you can create a symlink `bash` in `/usr/bin`:
 
     ln -s /bin/sh /usr/bin/bash
 
+The first way is used in this image tagged `bin` or `<alpine>-bin`.
+
+If you install `glibc-i18n-2.34-r0.apk` and create a locale by `/usr/glibc-compat/bin/localedef`, you will need to unpack the charmap. For example:
+
+    gunzip --keep /usr/glibc-compat/share/i18n/charmaps/UTF-8.gz
+    /usr/glibc-compat/bin/localedef -i cs_CZ -f UTF-8 cs_CZ.UTF-8
+
 ## Build, Test and Publish
 
 The local image is built as `alpine-glibc` and pushed to the docker hub as `prantlf/alpine-glibc:latest`.
