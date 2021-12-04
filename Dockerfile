@@ -1,10 +1,9 @@
 FROM alpine:3.15
 LABEL maintainer="Ferdinand Prantl <prantlf@gmail.com>"
 
-RUN apk update && apk --no-cache add gzip && \
-  wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
+RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
   wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.34-r0/glibc-2.34-r0.apk && \
-  apk --no-cache add glibc-2.34-r0.apk && \
+  apk update && apk add gzip glibc-2.34-r0.apk && \
   ln -sf /usr/glibc-compat/lib/ld-linux-x86-64.so.2 /usr/glibc-compat/lib/ld-linux-x86-64.so && \
   ln -sf /usr/glibc-compat/lib/libBrokenLocale.so.1 /usr/glibc-compat/lib/libBrokenLocale.so && \
   ln -sf /usr/glibc-compat/lib/libanl.so.1 /usr/glibc-compat/lib/libanl.so && \
@@ -25,12 +24,12 @@ RUN apk update && apk --no-cache add gzip && \
   ln -sf /usr/glibc-compat/lib/libutil.so.1 /usr/glibc-compat/lib/libutil.so && \
   rm glibc-2.34-r0.apk && \
   wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.34-r0/glibc-bin-2.34-r0.apk && \
-  apk --no-cache add glibc-bin-2.34-r0.apk && \
+  apk add glibc-bin-2.34-r0.apk && \
   rm glibc-bin-2.34-r0.apk && \
   wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.34-r0/glibc-i18n-2.34-r0.apk && \
-  apk --no-cache add glibc-i18n-2.34-r0.apk && \
+  apk add glibc-i18n-2.34-r0.apk && \
   rm glibc-i18n-2.34-r0.apk /etc/apk/keys/sgerrand.rsa.pub && \
   gunzip --keep /usr/glibc-compat/share/i18n/charmaps/UTF-8.gz && \
   /usr/glibc-compat/bin/localedef -i en_US -f UTF-8 en_US.UTF-8 && \
-  rm /usr/glibc-compat/share/i18n/charmaps/UTF-8 && \
+  rm /usr/glibc-compat/share/i18n/charmaps/UTF-8 /var/cache/apk/* && \
   apk del glibc-bin glibc-i18n gzip
