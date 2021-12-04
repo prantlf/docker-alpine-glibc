@@ -3,7 +3,7 @@ services:
   - docker:dind
 
 variables:
-  IMAGE_VER: latest
+  IMAGE_VER: $CI_COMMIT_REF_NAME
   GITLAB_TAG: $CI_REGISTRY_IMAGE:$IMAGE_VER
   HUB_TAG: prantlf/alpine-glibc:$IMAGE_VER
 
