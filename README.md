@@ -10,13 +10,15 @@ If you have trouble pulling the image from the Docker's default hub.docker.com, 
 
 Tags consist of versions of the Alpine Linux and GLIBC in this order, separated by a hyphen. The `latest` tag maps to the latest `<alpine>` tag. The latest `<alpine>` tag maps to the latest `<alpine>-<glibc>` tag. The `bin` and `<alpine>-bin` tags contain the `glibc-bin` package installed too.
 
-- [`latest`], `bin`, `3.15`, `3.15-bin`, `3.14`, `3.14-2.34`, `3.14-2.33`, `3.13`, `3.12`
+- [`latest`], `bin`
+- `3.16`, `3.16-bin`, `3.16-2.35`
+- `3.15`, `3.15-bin`, `3.14`, `3.14-2.34`, `3.14-2.33`, `3.13`, `3.12`
 
 ## Install
 
 ```
 docker pull prantlf/alpine-glibc
-docker pull prantlf/alpine-glibc:3.15
+docker pull prantlf/alpine-glibc:3.16
 ```
 
 ## Use
@@ -30,19 +32,6 @@ FROM prantlf/alpine-glibc:latest
 The final image can use the English locale by setting the environment variable `LANG` to  `C.UTF-8` or `en_US.UTF-8`.
 
 See the [`git-p4` Docker image repository] for an example.
-
-If you install `glibc-bin-2.34-r0.apk`, you will need to fix scripts that refer to `/usr/bin/bash`. For example:
-
-    sed -i 's#/usr/bin/bash#/bin/sh#' /usr/glibc-compat/bin/ldd
-    sed -i 's#/usr/bin/bash#/bin/sh#' /usr/glibc-compat/bin/sotruss
-    sed -i 's#/usr/bin/bash#/bin/sh#' /usr/glibc-compat/bin/tzselect
-    sed -i 's#/usr/bin/bash#/bin/sh#' /usr/glibc-compat/bin/xtrace
-
-Or you can create a symlink `bash` in `/usr/bin`:
-
-    ln -s /bin/sh /usr/bin/bash
-
-The first way is used in this image tagged `bin` or `<alpine>-bin`.
 
 If you install `glibc-i18n-2.34-r0.apk` and create a locale by `/usr/glibc-compat/bin/localedef`, you will need to unpack the charmap. For example:
 
@@ -61,12 +50,14 @@ The local image is built as `alpine-glibc` and pushed to the docker hub as `pran
     make build
     # Enter an interactive shell inside the created image:
     make run
-    # Tag the local image for pushing:
-    make tag
     # Login to the docker hub:
     make login
     # Push the local image to the docker hub:
     make push
+    # Push the local image to the docker hub:
+    make push
+    # Add version tags to the published image:
+    make tag
 
 ## License
 
