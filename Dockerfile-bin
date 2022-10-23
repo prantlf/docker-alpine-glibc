@@ -1,7 +1,8 @@
-FROM prantlf/alpine-glibc:latest
+FROM prantlf/alpine-glibc
 LABEL maintainer="Ferdinand Prantl <prantlf@gmail.com>"
 
 RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
   wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.35-r0/glibc-bin-2.35-r0.apk && \
   apk add --no-cache glibc-bin-2.35-r0.apk && \
+  ln -sf /usr/glibc-compat/lib/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2 && \
   rm glibc-bin-2.35-r0.apk /etc/apk/keys/sgerrand.rsa.pub

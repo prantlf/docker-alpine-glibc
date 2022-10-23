@@ -32,4 +32,6 @@ RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/s
   gunzip --keep /usr/glibc-compat/share/i18n/charmaps/UTF-8.gz && \
   /usr/glibc-compat/bin/localedef -i en_US -f UTF-8 en_US.UTF-8 && \
   apk del glibc-bin glibc-i18n gzip && \
+  mkdir -p /lib64 && \
+  ln -sf /usr/glibc-compat/lib/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2 && \
   rm /usr/glibc-compat/share/i18n/charmaps/UTF-8 /var/cache/apk/*

@@ -38,6 +38,10 @@ If you install `glibc-i18n-2.34-r0.apk` and create a locale by `/usr/glibc-compa
     gunzip --keep /usr/glibc-compat/share/i18n/charmaps/UTF-8.gz
     /usr/glibc-compat/bin/localedef -i cs_CZ -f UTF-8 cs_CZ.UTF-8
 
+It appears, that installing another package using `apk` breaks the symlink to `ld-linux-x86-64.so.2` in `/lib64`. If it happens to you, restore the symlink after executing `apk`:
+
+    ln -sf /usr/glibc-compat/lib/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2
+
 ## Build, Test and Publish
 
 The local image is built as `alpine-glibc` and pushed to the docker hub as `prantlf/alpine-glibc:latest`.

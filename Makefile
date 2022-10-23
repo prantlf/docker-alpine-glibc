@@ -1,5 +1,11 @@
 clean ::
-	docker image rm alpine-glibc alpine-glibc:bin prantlf/alpine-glibc prantlf/alpine-glibc:bin
+	docker image rm alpine-glibc alpine-glibc:bin \
+	  prantlf/alpine-glibc prantlf/alpine-glibc:bin \
+	  prantlf/alpine-glibc:3.16 prantlf/alpine-glibc:3.16-bin \
+	  prantlf/alpine-glibc:3.16-2.35 prantlf/alpine-glibc:3.16-2.35-bin \
+		registry.gitlab.com/prantlf/docker-alpine-glibc registry.gitlab.com/prantlf/docker-alpine-glibc:bin \
+		registry.gitlab.com/prantlf/docker-alpine-glibc:3.16 registry.gitlab.com/prantlf/docker-alpine-glibc:3.16-bin \
+		registry.gitlab.com/prantlf/docker-alpine-glibc:3.16-2.35 registry.gitlab.com/prantlf/docker-alpine-glibc:3.16-2.35-bin
 
 lint ::
 	docker run --rm -i \
@@ -12,8 +18,10 @@ lint ::
 build ::
 	docker build -t alpine-glibc .
 	docker tag alpine-glibc prantlf/alpine-glibc
+	docker tag alpine-glibc registry.gitlab.com/prantlf/docker-alpine-glibc
 	docker build -t alpine-glibc:bin -f Dockerfile-bin .
 	docker tag alpine-glibc:bin prantlf/alpine-glibc:bin
+	docker tag alpine-glibc:bin registry.gitlab.com/prantlf/docker-alpine-glibc:bin
 
 run ::
 	docker run --rm -t -i alpine-glibc
@@ -27,7 +35,6 @@ push ::
 	docker push prantlf/alpine-glibc:bin
 	docker push registry.gitlab.com/prantlf/docker-alpine-glibc
 	docker push registry.gitlab.com/prantlf/docker-alpine-glibc:bin
-
 
 pull ::
 	docker pull prantlf/alpine-glibc
