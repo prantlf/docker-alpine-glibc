@@ -28,6 +28,13 @@ push ::
 	docker push registry.gitlab.com/prantlf/docker-alpine-glibc
 	docker push registry.gitlab.com/prantlf/docker-alpine-glibc:bin
 
+
+pull ::
+	docker pull prantlf/alpine-glibc
+	docker pull prantlf/alpine-glibc:bin
+	docker pull registry.gitlab.com/prantlf/docker-alpine-glibc
+	docker pull registry.gitlab.com/prantlf/docker-alpine-glibc:bin
+
 tag ::
 	docker tag prantlf/alpine-glibc prantlf/alpine-glibc:3.16
 	docker tag prantlf/alpine-glibc prantlf/alpine-glibc:3.16-2.35

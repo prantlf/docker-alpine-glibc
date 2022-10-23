@@ -11,7 +11,7 @@ If you have trouble pulling the image from the Docker's default hub.docker.com, 
 Tags consist of versions of the Alpine Linux and GLIBC in this order, separated by a hyphen. The `latest` tag maps to the latest `<alpine>` tag. The latest `<alpine>` tag maps to the latest `<alpine>-<glibc>` tag. The `bin` and `<alpine>-bin` tags contain the `glibc-bin` package installed too.
 
 - [`latest`], `bin`
-- `3.16`, `3.16-bin`, `3.16-2.35`
+- `3.16`, `3.16-bin`, `3.16-2.35`, `3.16-2.35-bin`
 - `3.15`, `3.15-bin`, `3.14`, `3.14-2.34`, `3.14-2.33`, `3.13`, `3.12`
 
 ## Install
@@ -54,8 +54,8 @@ The local image is built as `alpine-glibc` and pushed to the docker hub as `pran
     make login
     # Push the local image to the docker hub:
     make push
-    # Push the local image to the docker hub:
-    make push
+    # Pull the image from the docker hub:
+    make pull
     # Add version tags to the published image:
     make tag
 
